@@ -1,0 +1,18 @@
+<h1 class="text-2xl font-bold mb-4">Welcome, <%= current_user.email %> 👷</h1>
+
+<h2 class="text-xl mb-2">Your Projects</h2>
+<ul class="mb-4">
+  <% @projects.each do |project| %>
+    <li><%= link_to project.title, project_path(project) %> - <%= project.status %></li>
+  <% end %>
+</ul>
+
+<h2 class="text-xl mb-2">Upcoming Tasks</h2>
+<ul>
+  <% @tasks.each do |task| %>
+    <li>
+      <%= task.title %> (due <%= task.due_date.strftime("%b %d") %>) – 
+      <%= link_to task.project.title, project_path(task.project) %>
+    </li>
+  <% end %>
+</ul>

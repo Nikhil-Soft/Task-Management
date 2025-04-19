@@ -1,0 +1,20 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Projects" %>
+
+<h1>Projects</h1>
+
+<div id="projects">
+  <% @projects.each do |project| %>
+    <% completed = project.tasks.where(status: "complete").count %>
+    <% total = project.tasks.count %>
+    <% percent = total > 0 ? (completed.to_f / total * 100).round : 0 %>
+    <p><%= percent %>% Complete</p>
+    <%= render project %>
+    <p>
+      <%= link_to "Show this project", project %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New project", new_project_path %>
