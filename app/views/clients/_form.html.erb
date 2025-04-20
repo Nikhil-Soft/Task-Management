@@ -1,9 +1,10 @@
-<%= form_with(model: client) do |form| %>
+<%= form_with(model: client, class: "max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md space-y-6") do |form| %>
   <% if client.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
-
-      <ul>
+    <div class="bg-red-50 border border-red-200 text-red-700 p-4 rounded-md">
+      <h2 class="font-semibold mb-2">
+        <%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:
+      </h2>
+      <ul class="list-disc pl-5 text-sm">
         <% client.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,22 +12,26 @@
     </div>
   <% end %>
 
+  <!-- Name -->
   <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.label :name, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= form.text_field :name, class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", required: true %>
   </div>
 
+  <!-- Email -->
   <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
+    <%= form.label :email, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= form.text_field :email, class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", required: true %>
   </div>
 
+  <!-- Phone -->
   <div>
-    <%= form.label :phone, style: "display: block" %>
-    <%= form.text_field :phone %>
+    <%= form.label :phone, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= form.text_field :phone, class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
   </div>
 
+  <!-- Submit -->
   <div>
-    <%= form.submit %>
+    <%= form.submit "Save Client", class: "bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition" %>
   </div>
 <% end %>

@@ -1,18 +1,43 @@
-<h1 class="text-2xl font-bold mb-4">Welcome, <%= current_user.email %> 👷</h1>
+<div class="max-w-5xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6 text-gray-900">
+    Welcome, <span class="text-blue-600"><%= current_user.email %></span> 👷
+  </h1>
 
-<h2 class="text-xl mb-2">Your Projects</h2>
-<ul class="mb-4">
-  <% @projects.each do |project| %>
-    <li><%= link_to project.title, project_path(project) %> - <%= project.status %></li>
-  <% end %>
-</ul>
+  <!-- Projects Section -->
+  <h2 class="text-2xl font-semibold text-gray-800 mb-3">Your Projects</h2>
+  <ul class="space-y-2 mb-8">
+    <% @projects.each do |project| %>
+      <li class="flex items-center justify-between bg-white shadow-sm p-4 rounded-md border border-gray-200">
+        <div>
+          <%= link_to project.title, project_path(project), class: "text-blue-600 font-medium hover:underline" %>
+        </div>
+        <span class="text-sm font-semibold px-2 py-1 rounded 
+                     <%= project.status == 'active' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-700' %>">
+          <%= project.status.titleize %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
 
-<h2 class="text-xl mb-2">Upcoming Tasks</h2>
-<ul>
-  <% @tasks.each do |task| %>
-    <li>
-      <%= task.title %> (due <%= task.due_date.strftime("%b %d") %>) – 
-      <%= link_to task.project.title, project_path(task.project) %>
-    </li>
-  <% end %>
-</ul>
+  <!-- Tasks Section -->
+  <h2 class="text-2xl font-semibold text-gray-800 mb-3">Upcoming Tasks</h2>
+  <ul class="space-y-2">
+    <% @tasks.each do |task| %>
+      <li class="bg-white shadow-sm p-4 rounded-md border border-gray-200">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p class="text-gray-800 font-medium"><%= task.title %></p>
+            <p class="text-sm text-gray-500">
+              Due <%= task.due_date.strftime("%b %d, %Y") %> • 
+              <%= link_to task.project.title, project_path(task.project), class: "text-blue-600 hover:underline" %>
+            </p>
+          </div>
+          <span class="mt-2 sm:mt-0 px-2 py-1 text-sm rounded-full 
+                       <%= task.status == 'complete' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' %>">
+            <%= task.status.titleize %>
+          </span>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

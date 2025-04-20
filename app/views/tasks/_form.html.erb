@@ -1,9 +1,10 @@
-<%= form_with(model: task) do |form| %>
+<%= form_with(model: task, class: "max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md space-y-6") do |form| %>
   <% if task.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
-
-      <ul>
+    <div class="bg-red-50 border border-red-200 text-red-700 p-4 rounded-md">
+      <h2 class="font-semibold mb-2">
+        <%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:
+      </h2>
+      <ul class="list-disc pl-5 text-sm">
         <% task.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,37 +12,50 @@
     </div>
   <% end %>
 
+  <!-- Title -->
   <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+    <%= form.label :title, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= form.text_field :title, class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", required: true %>
   </div>
 
+  <!-- Description -->
   <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.textarea :description %>
+    <%= form.label :description, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= form.text_area :description, rows: 3, class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
   </div>
 
+  <!-- Status -->
   <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
+    <%= form.label :status, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= form.text_field :status, class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
   </div>
 
+  <!-- Due Date -->
   <div>
-    <%= form.label :due_date, style: "display: block" %>
-    <%= form.date_field :due_date %>
+    <%= form.label :due_date, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= form.date_field :due_date, class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", required: true %>
   </div>
 
+  <!-- Project -->
   <div>
-    <%= form.label :project_id, style: "display: block" %>
-    <%= form.text_field :project_id %>
+    <%= form.label :project_id, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= form.select :project_id,
+          options_from_collection_for_select(@projects, :id, :title),
+          { prompt: "Select a project" },
+          class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", required: true %>
   </div>
 
+  <!-- User -->
   <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
+    <%= form.label :user_id, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= form.select :user_id,
+          options_from_collection_for_select(@users, :id, :email),
+          { prompt: "Assign to user" },
+          class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", required: true %>
   </div>
 
+  <!-- Submit -->
   <div>
-    <%= form.submit %>
+    <%= form.submit "Save Task", class: "bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition" %>
   </div>
 <% end %>

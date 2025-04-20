@@ -13,10 +13,14 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @clients = Client.all
+    @users = User.all
   end
 
   # GET /projects/1/edit
   def edit
+    @clients = Client.all
+    @users = User.all
   end
 
   # POST /projects or /projects.json

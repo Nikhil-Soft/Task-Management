@@ -13,10 +13,14 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    @projects = Project.all
+    @users = User.all
   end
 
   # GET /tasks/1/edit
   def edit
+    @projects = Project.all
+    @users = User.all
   end
 
   # POST /tasks or /tasks.json

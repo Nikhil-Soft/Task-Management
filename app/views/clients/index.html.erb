@@ -1,16 +1,35 @@
-<p style="color: green"><%= notice %></p>
+<% if notice %>
+  <p class="text-green-700 bg-green-50 border border-green-200 px-4 py-2 rounded mb-4">
+    <%= notice %>
+  </p>
+<% end %>
 
 <% content_for :title, "Clients" %>
 
-<h1>Clients</h1>
+<div class="max-w-5xl mx-auto px-4 py-8">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-gray-900">Clients</h1>
+    <%= link_to "➕ New Client", new_client_path,
+        class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition" %>
+  </div>
 
-<div id="clients">
-  <% @clients.each do |client| %>
-    <%= render client %>
-    <p>
-      <%= link_to "Show this client", client %>
-    </p>
-  <% end %>
+  <div id="clients" class="space-y-4">
+    <% @clients.each do |client| %>
+      <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 hover:shadow transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-semibold text-gray-800"><%= client.name %></h2>
+            <% if client.email.present? %>
+              <p class="text-sm text-gray-600"><%= client.email %></p>
+            <% end %>
+          </div>
+
+          <div>
+            <%= link_to "🔍 View", client_path(client),
+                class: "text-blue-600 hover:underline text-sm" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New client", new_client_path %>

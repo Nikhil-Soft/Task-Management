@@ -21,12 +21,12 @@
 
   <p>
     <strong>Project:</strong>
-    <%= task.project_id %>
+    <%= task&.project&.title %>
   </p>
 
   <p>
     <strong>User:</strong>
-    <%= task.user_id %>
+    <%= task&.user&.email %>
   </p>
 
 </div>

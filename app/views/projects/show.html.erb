@@ -1,10 +1,29 @@
-<p style="color: green"><%= notice %></p>
+<% if notice %>
+  <div class="mb-4 p-3 bg-green-100 border border-green-300 text-green-800 rounded">
+    <%= notice %>
+  </div>
+<% end %>
 
-<%= render @project %>
+<div class="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto">
+  <h1 class="text-2xl font-semibold text-gray-800 mb-4"><%= @project.title %></h1>
 
-<div>
-  <%= link_to "Edit this project", edit_project_path(@project) %> |
-  <%= link_to "Back to projects", projects_path %>
+  <div class="space-y-2 text-gray-700">
+    <p><span class="font-medium">Description:</span> <%= @project.description.presence || "-" %></p>
+    <p><span class="font-medium">Status:</span> <%= @project.status.titleize %></p>
+    <p><span class="font-medium">Client:</span> <%= @project.client.name %></p>
+    <p><span class="font-medium">Assigned User:</span> <%= @project.user.email %></p>
+  </div>
 
-  <%= button_to "Destroy this project", @project, method: :delete %>
+  <div class="mt-6 flex flex-wrap gap-3">
+    <%= link_to "Edit", edit_project_path(@project),
+                class: "px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600" %>
+
+    <%= link_to "Back", projects_path,
+                class: "px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300" %>
+
+    <%= button_to "Delete", @project,
+                  method: :delete,
+                  data: { confirm: "Are you sure?" },
+                  class: "bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition" %>
+  </div>
 </div>

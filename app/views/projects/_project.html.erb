@@ -16,12 +16,12 @@
 
   <p>
     <strong>Client:</strong>
-    <%= project.client_id %>
+    <%= project&.title %>
   </p>
 
   <p>
     <strong>User:</strong>
-    <%= project.user_id %>
+    <%= project&.user&.email %>
   </p>
 
 </div>
